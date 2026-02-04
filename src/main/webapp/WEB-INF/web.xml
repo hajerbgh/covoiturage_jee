@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    
+    <display-name>covoiturageApp</display-name>
+
+    <!-- Paramètres de configuration de la base de données -->
+    <context-param>
+        <param-name>db.driver</param-name>
+        <param-value>com.mysql.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/covoiturage_app?useSSL=false&amp;serverTimezone=UTC</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.username</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.password</param-name>
+        <param-value></param-value>
+    </context-param>
+    
+    <!-- Configuration d'encodage par défaut -->
+    <context-param>
+        <param-name>defaultEncoding</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
+
+    <!-- Page d'accueil -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>views/accueil.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- ============ FILTRES ============ -->
+    
+    <!-- Filtre d'encodage UTF-8 -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.covoiturage.util.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Filtre d'authentification (AJOUT IMPORTANT) -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.covoiturage.util.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/dashboard/*</url-pattern>
+        <url-pattern>/trajets/*</url-pattern>
+        <url-pattern>/reservations/*</url-pattern>
+        <url-pattern>/profil</url-pattern>
+        <url-pattern>/profil/*</url-pattern>
+        <url-pattern>/voitures/*</url-pattern>
+    </filter-mapping>
+    
+ 
+
+    <!-- ============ SERVLETS ============ -->
+    <servlet>
+    <servlet-name>ReservationServlet</servlet-name>
+    <servlet-class>com.covoiturage.controller.ReservationServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ReservationServlet</servlet-name>
+    <url-pattern>/reservations</url-pattern>
+</servlet-mapping>
+
+
+
+<servlet>
+    <servlet-name>HistoriqueServlet</servlet-name>
+    <servlet-class>com.covoiturage.controller.HistoriqueServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>HistoriqueServlet</servlet-name>
+    <url-pattern>/historique</url-pattern>
+</servlet-mapping>
+
+
+    
+    <!-- Servlet de test -->
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlet d'accueil -->
+    <servlet>
+        <servlet-name>AccueilServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.AccueilServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccueilServlet</servlet-name>
+        <url-pattern>/accueil</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlets d'authentification -->
+    <servlet>
+        <servlet-name>InscriptionServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.InscriptionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InscriptionServlet</servlet-name>
+        <url-pattern>/inscription</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ConnexionServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.ConnexionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConnexionServlet</servlet-name>
+        <url-pattern>/connexion</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeconnexionServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.DeconnexionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeconnexionServlet</servlet-name>
+        <url-pattern>/deconnexion</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>ProfilServlet</servlet-name>
+    <servlet-class>com.covoiturage.controller.ProfilServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ProfilServlet</servlet-name>
+    <url-pattern>/profil</url-pattern>
+</servlet-mapping>
+    
+    <!-- Dashboard Servlet (AJOUT) -->
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.DashboardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>PassagerServlet</servlet-name>
+    <servlet-class>com.covoiturage.controller.PassagerServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>PassagerServlet</servlet-name>
+    <url-pattern>/passagers</url-pattern>
+</servlet-mapping>
+    
+    <!-- Trajets Servlet (AJOUT) -->
+    <servlet>
+        <servlet-name>TrajetServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.TrajetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TrajetServlet</servlet-name>
+        <url-pattern>/trajets</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlets d'avis -->
+    <servlet>
+    <servlet-name>EvaluationServlet</servlet-name>
+    <servlet-class>com.covoiturage.controller.EvaluationServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>EvaluationServlet</servlet-name>
+    <url-pattern>/evaluations</url-pattern>
+</servlet-mapping>
+
+<servlet>
+        <servlet-name>AvisServlet</servlet-name>
+        <servlet-class>com.covoiturage.controller.AvisServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AvisServlet</servlet-name>
+        <url-pattern>/mes-avis</url-pattern>
+    </servlet-mapping>
+    
+    
+    <!-- Notification Servlet -->
+<servlet>
+    <servlet-name>NotificationServlet</servlet-name>
+    <servlet-class>com.covoiturage.controller.NotificationServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>NotificationServlet</servlet-name>
+    <url-pattern>/notifications</url-pattern>
+</servlet-mapping>
+
+
+
+
+   <!-- Configuration Email -->
+<context-param>
+    <param-name>mail.smtp.host</param-name>
+    <param-value>smtp.gmail.com</param-value>
+</context-param>
+<context-param>
+    <param-name>mail.smtp.port</param-name>
+    <param-value>587</param-value>
+</context-param>
+<context-param>
+    <param-name>mail.smtp.auth</param-name>
+    <param-value>true</param-value>
+</context-param>
+<context-param>
+    <param-name>mail.smtp.starttls.enable</param-name>
+    <param-value>true</param-value>
+</context-param>
+<context-param>
+    <param-name>mail.username</param-name>
+    <param-value>hajerbenghazi2003@gmail.com</param-value>
+</context-param>
+<context-param>
+    <param-name>mail.password</param-name>
+    <!-- n mot de passe d'application Gmail -->
+    <param-value>ipby dogs zswk rrfz</param-value>
+</context-param>
+<context-param>
+    <param-name>mail.from</param-name>
+    <param-value>noreply@covoiturageapp.com</param-value>
+</context-param>
+    
+
+    <!-- ============ GESTION DES ERREURS ============ -->
+    
+    <!-- Pages d'erreur -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/erreur/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/erreur/500.jsp</location>
+    </error-page>
+    
+    <!-- Gestion des exceptions -->
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/views/erreur/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <location>/WEB-INF/views/erreur/500.jsp</location>
+    </error-page>
+    
+    <!-- ============ CONFIGURATION DE SESSION ============ -->
+    
+    <!-- Configuration de la session -->
+    <session-config>
+        <session-timeout>30</session-timeout> <!-- 30 minutes -->
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure> <!-- Mettre à true en production avec HTTPS -->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+    
+    <!-- Configuration des JSP -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+            <taglib-location>/WEB-INF/lib/jstl-1.2.jar</taglib-location>
+        </taglib>
+       
+    </jsp-config>
+    
+</web-app>
