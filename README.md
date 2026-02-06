@@ -24,7 +24,8 @@ Application web de covoiturage développée avec Java Enterprise Edition (JEE), 
 - **Serveur** : Apache Tomcat 9.0
 - **Outils** : Maven, Eclipse IDE
 
-## 📸 Captures d'écran
+## 📸 Captures vidéo
+https://drive.google.com/file/d/1HNFh-ND1SaJH3HMkeZOpJjzkw8DaX8WG/view?usp=sharing
 
 ### Page d'accueil
 ![Accueil](screenshots/homepage.png)
