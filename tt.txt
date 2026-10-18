@@ -1,2 +1,1 @@
-Premiers pas avec Google Maps Platform
-Vous pouvez maintenant commencer à développer votre application. Voici la clé API dont vous avez besoin pour la mise en œuvre. La clé API peut être référencée dans la section "Identifiants". AIzaSyCil5NTW0pDAwlvV5dAYrf3ejVzGTdWjlk 
+
